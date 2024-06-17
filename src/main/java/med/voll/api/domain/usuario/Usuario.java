@@ -29,10 +29,9 @@ public class Usuario implements UserDetails {
     private String login;
     private String senha;
 
-
-    @Override
+    @Override//usado para controle de permissão, ou seja, tenho varios tipos de permissão dependendo do perfil(admin,usuario etc..)
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));//usado para simular, um perfi, porque o spring precisa de um objeto valido
     }
 
     @Override

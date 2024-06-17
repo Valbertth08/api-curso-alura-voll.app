@@ -34,6 +34,7 @@ public class MedicoController {
     }
     @GetMapping
     public ResponseEntity<Page<DadosListagemMedico>> listar(@PageableDefault(sort = {"nome"}) Pageable paginiacao){
+
         //@PageableDefault: eu posso definir um padrão de paginação caso nenhum parmetro seja passado na url, quanto de paginação, ou se ordenação.
         //obs: caso os parametros sejam passados na url, irar sobrescrever o default.
         var page=  repository.findAllByAtivoTrue(paginiacao).map(DadosListagemMedico::new);
