@@ -1,0 +1,1 @@
+alter table usuarios add  role varchar(200) not null;

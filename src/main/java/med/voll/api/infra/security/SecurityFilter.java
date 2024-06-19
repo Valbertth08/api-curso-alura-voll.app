@@ -22,7 +22,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override//essa metodo é executada uma vez para cada requisição
     //esse metodo é executado antes de chegar no controller
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var tokenJWT = recuperarToke(request);
+        var tokenJWT = recuperarToken(request);
         if (tokenJWT != null) {
             var subject=token.getSubject(tokenJWT);
             var usuario= repository.findByLogin(subject);
@@ -31,7 +31,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);//isso é usado para chamar o proximo filtro
     }
-    private String recuperarToke(HttpServletRequest request) {
+    private String recuperarToken(HttpServletRequest request) {
         var authorizationHeeader= request.getHeader("Authorization");
         if(authorizationHeeader!=null){
             return authorizationHeeader.replace("Bearer ","");
