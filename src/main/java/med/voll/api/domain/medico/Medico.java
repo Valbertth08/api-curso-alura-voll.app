@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.domain.consulta.Consulta;
 import med.voll.api.domain.endereco.Endereco;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Medico")
 @Table(name = "medicos")
@@ -26,6 +30,8 @@ public class Medico {
     private Especialidade especialidade;
     @Embedded
     private Endereco endereco;
+    @OneToMany(mappedBy = "medico")
+    private List<Consulta> lista= new ArrayList<>();
 
     private Boolean ativo;
     public Medico(DadosCadastroMedico dados) {

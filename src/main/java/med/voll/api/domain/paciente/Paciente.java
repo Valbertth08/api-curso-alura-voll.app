@@ -6,7 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.domain.consulta.Consulta;
 import med.voll.api.domain.endereco.Endereco;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -24,6 +28,8 @@ public class Paciente {
     private String telefone;
     @Embedded
     Endereco endereco;
+    @OneToMany(mappedBy = "paciente")
+    private List<Consulta> lista= new ArrayList<>();
 
     private Boolean ativo;
     public Paciente(DadosCadastroPaciente dados) {

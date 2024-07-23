@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("medicos")
+@RequestMapping("/medicos")
 public class MedicoController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class MedicoController {
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder){
-
+        System.out.println("chegou no controller");
         var medico=new Medico(dados);
         repository.save(medico);
         //URI: quando utilizamos UriComponentsBuilder ele cria o caminho padrão da api (http://localhost:8080) obs: isso na nossa maquina local caso seja outro enderço, é outra coisa
@@ -36,10 +36,10 @@ public class MedicoController {
     }
     @GetMapping
     public ResponseEntity<Page<DadosListagemMedico>> listar(@PageableDefault(sort = {"nome"}) Pageable paginiacao){
-
         //@PageableDefault: eu posso definir um padrão de paginação caso nenhum parmetro seja passado na url, quanto de paginação, ou se ordenação.
         //obs: caso os parametros sejam passados na url, irar sobrescrever o default.
         var page=  repository.findAllByAtivoTrue(paginiacao).map(DadosListagemMedico::new);
+        //obs: o spring possuem um findAll que pesquisa baseado na page indicada.
         //map(DadosListagemMedico::new) === .map(medico -> new DadosListagemMedico(medico))// ambas duas formas fazem a mesma coisa
         //estou pegando a lista de medicos retornado pelo o findall, transformando essa lista em strems, passando cada
         //medico como argumento para o construtor de DadosdeListagemMedico e transformando em DadosListagemMedico e retornando ele como uma lista

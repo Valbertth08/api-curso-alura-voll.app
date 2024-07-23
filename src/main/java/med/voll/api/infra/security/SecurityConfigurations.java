@@ -28,12 +28,15 @@ public class SecurityConfigurations {
         //esse tipo do metodo é usado para configurar coisas relacionadas ao processo de autorização e
         return http.csrf(csrf -> csrf.disable())//desabilito essa proteção contra ataque, porque por padrão token  ja vem com essa protação
                 //indico que a sessão vai ter a politica de Stateless e não Statefful(que aparece o form, e bloqueia as requisições), desabilito a estrategia padrão
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(req->{
-                    req.requestMatchers("/auth/login").permitAll();//estou dando permissão de acesso sem um token, somente para login
-                    req.requestMatchers("/auth/registrar").hasRole("ADMIN");
-                    req.anyRequest().authenticated();//indico   que em qualquer outra requisição a pessoa precisa esta autenticada//estou indicando que quero chamar meu filtro personalizado primeiro do padrão de segurança.
-                }).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authorizeHttpRequests(rq->rq.anyRequest().permitAll())
+//                .authorizeHttpRequests(req->{
+//                    req.requestMatchers("/auth/login").permitAll();//estou dando permissão de acesso sem um token, somente para login
+//                    req.requestMatchers("/auth/registrar").permitAll();
+//                    req.requestMatchers("/consulta").permitAll();
+//                    req.requestMatchers("/medicos").permitAll();
+//                    req.anyRequest().authenticated();//indico   que em qualquer outra requisição a pessoa precisa esta autenticada//estou indicando que quero chamar meu filtro personalizado primeiro do padrão de segurança.
+//                })
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
     @Bean//utilizamos o bean para ensinar para o spring como ele criar um objetoo( ou seja, para ele saber inejtar o AuthenticationManager ele usa essa classe)
