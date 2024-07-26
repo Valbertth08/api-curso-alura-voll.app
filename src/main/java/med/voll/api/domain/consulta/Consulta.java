@@ -35,10 +35,11 @@ public class Consulta {
 
     private LocalDateTime data;
 
+    @Column(name = "motivo_cancelamento")
     @Enumerated(EnumType.STRING)
-    private StatusConsulta status;
-    void excluir(){
-        this.status=StatusConsulta.CANCELADA;
+    private MotivoCancelamento cancelamento;
+    void cancelar( MotivoCancelamento cancelamento){
+        this.cancelamento=cancelamento;
     }
 
 }

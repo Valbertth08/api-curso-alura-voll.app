@@ -14,7 +14,7 @@ public record DadosAgendamentoConsulta(
         Long idPaciente,
         @NonNull
         @Future//indica que a data precisa ser no futuro
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
         LocalDateTime data,
         Especialidade especialidade
 ) {

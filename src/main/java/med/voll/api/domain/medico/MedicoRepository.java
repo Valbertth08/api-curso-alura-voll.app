@@ -12,19 +12,30 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     @Query("""
             select m from Medico m
             where
-            m.ativo=true
-            and m.especialidade= :especialidade
+            m.ativo = true
+            and
+            m.especialidade = :especialidade
             and
             m.id not in(
                 select c.medico.id from Consulta c
-                where c.data= :data
+                where
+                c.data = :data
+        and
+                c.motivoCancelamento is null
             )
             order by rand()
             limit 1
-            """)
+""")
     //o :especilaidade e :data (indica que é o parametro do metodo)
     //o m.id not in() estou indicando que não é pra trazer os ids que não estão dentro desse subselect, isso
     //foi feito para fazer a filtragem dos que estejam agendato nessa data, assim na consulta principal pega só medicos que
     //estejam livres, não tendo nenhum agendamento na data mostrada.
     Medico escolherMedicoAletorioLivreNaData(Especialidade especialidade, LocalDateTime data);
+    @Query("""
+            select m.ativo
+            from Medico m
+            where
+            m.id= :id
+            """)
+    Boolean findAtivoById(Long id);
 }

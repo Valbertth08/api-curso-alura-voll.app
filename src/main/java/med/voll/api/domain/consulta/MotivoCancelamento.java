@@ -1,14 +1,16 @@
 package med.voll.api.domain.consulta;
 
 public enum MotivoCancelamento {
-    PACIENTE_DESISTIU("paciente desistiu"),
-    MEDICO_CANCELOU("medico cancelou");
-    private  String motivo;
 
-    MotivoCancelamento(String motivo) {
-        this.motivo = motivo;
+    PACIENTE_DESISTIU("paciente desistiu"),
+    MEDICO_CANCELOU("medico cancelou"),
+    OUTROS("outro");
+    private String motivo ;
+
+    MotivoCancelamento(String status) {
+        this.motivo = status;
     }
-    public String getMotivo() {
-        return motivo;
+    String getStatus(){
+        return this.motivo;
     }
 }
