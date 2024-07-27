@@ -1,6 +1,7 @@
 package med.voll.api.controller;
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.domain.paciente.*;
@@ -14,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("pacientes")
+@SecurityRequirement(name = "bearer-key")//indico que eu vou utilizar o token para requisições na interface do swagger
 public class PacienteController {
     @Autowired
     PacienteRepository pacienteRepository;
