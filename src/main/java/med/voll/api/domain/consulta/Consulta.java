@@ -37,9 +37,9 @@ public class Consulta {
 
     @Column(name = "motivo_cancelamento")
     @Enumerated(EnumType.STRING)
-    private MotivoCancelamento cancelamento;
+    private MotivoCancelamento motivoCancelamento;
     void cancelar( MotivoCancelamento cancelamento){
-        this.cancelamento=cancelamento;
+        this.motivoCancelamento=cancelamento;
     }
 
 }
