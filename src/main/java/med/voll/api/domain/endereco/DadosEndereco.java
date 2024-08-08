@@ -9,6 +9,4 @@ public record DadosEndereco(
         String complemento,
         String numero) {
 
-
-
 }

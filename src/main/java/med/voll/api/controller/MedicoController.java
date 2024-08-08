@@ -25,7 +25,6 @@ public class MedicoController {
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder){
-        System.out.println("chegou no controller");
         var medico=new Medico(dados);
         repository.save(medico);
         //URI: quando utilizamos UriComponentsBuilder ele cria o caminho padrão da api (http://localhost:8080) obs: isso na nossa maquina local caso seja outro enderço, é outra coisa
